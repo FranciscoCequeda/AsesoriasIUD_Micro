@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  asesorias-micro01:
+    container_name: 'iud_asesorias_micro01'
+    image: franciscocequeda/iud_asesorias_micro:v1
+    # image: 'franciscocequeda/iud_asesorias_micro:v1'
+    # build:
+    #   context: .
+    ports:
+      - "6044:4000"
+    networks:
+      - IUD-Asesorias
+    environment:
+      CONTAINER_HOST: 'iud_asesorias_micro01'
+
+  asesorias-micro02:
+    container_name: 'iud_asesorias_micro02'
+    image: franciscocequeda/iud_asesorias_micro:v1
+    # image: 'franciscocequeda/iud_asesorias_micro:v1'
+    # build:
+    #   context: .
+    ports:
+      - "6045:4000"
+    networks:
+      - IUD-Asesorias
+    environment:
+      CONTAINER_HOST: 'iud_asesorias_micro02'
+
+  balanceador:
+    container_name: 'load-balancer'
+    image: 'franciscocequeda/load-balancer:v1'
+    # image: 'franciscocequeda/load-balancer:v1'
+    # build:
+    #   context: ./LoadBalancer
+    ports:
+      - "6050:80"
+    networks:
+      - IUD-Asesorias
+    depends_on:
+      - asesorias-micro01
+      - asesorias-micro02
+    restart: always
+networks:
+  IUD-Asesorias:
