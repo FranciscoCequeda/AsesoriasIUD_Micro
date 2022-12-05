@@ -13,6 +13,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sh 'docker network prune --force'
                 sh 'docker-compose down'
                 sh 'docker-compose up -d --build'
             }
