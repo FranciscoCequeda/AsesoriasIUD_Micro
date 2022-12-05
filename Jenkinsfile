@@ -13,8 +13,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sh 'docker-compose down -v --rmi all'
                 sh 'docker network prune --force'
-                sh 'docker-compose down'
                 sh 'docker-compose up -d --build'
             }
         }
