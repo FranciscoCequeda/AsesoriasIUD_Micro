@@ -27,7 +27,7 @@ services:
       CONTAINER_HOST: 'iud_asesorias_micro02'
 
   balanceador:
-    container_name: 'load-balancer'
+    container_name: 'iud_asesorias_balancer'
     image: 'franciscocequeda/load-balancer:v1'
     # image: 'franciscocequeda/load-balancer:v1'
     # build:
